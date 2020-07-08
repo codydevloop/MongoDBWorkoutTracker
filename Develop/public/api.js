@@ -30,7 +30,7 @@ const API = {
       headers: { "Content-Type": "application/json" }
     });
 
-    const json = await res.json();
+    const json = await res.text();
 
     return json;
   },
@@ -43,4 +43,4 @@ const API = {
   },
 };
 
-module.exports = API;
+// module.exports = API;

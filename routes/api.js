@@ -1,4 +1,4 @@
-const express = require ("express");
+const express = require("express");
 const router = express.Router();
 const path = require("path");
 const Workout = require("../models/workout");
@@ -19,9 +19,13 @@ router.get("/exercise", (req, res) => {
     //res.send("you made it");
 })
 
-router.get("/api/workouts", (req, res) => {
-    try{
+
+// API routes
+
+router.get("/api/workouts", async (req, res) => {
+    try {
         const data = await Workout.find({});
+        console.log(data);
         res.json(data);
 
     } catch (error) {
@@ -29,16 +33,37 @@ router.get("/api/workouts", (req, res) => {
         res.send(error);
 
     }
-    const data = await 
     //res.send("you made it");
 })
 
 
+///work on this one
+router.put("/api/workouts/:id", async (req, res) => {
+    try {
+        const data = await Workout.findByIdAndUpdate({id:req.params.id},
+            { $push: { exercises: req.body } }, { new: true });
 
+        console.log(data);
+        res.json(data);
 
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
 
-
-
+router.post("/api/workouts/", async (req, res) => {
+    try {
+        const data = await Workout.create(req.body);
+        
+        console.log(data);
+        res.json(data);
+        
+    } catch (error) {
+        console.log(error);
+        res.send(error);
+    }
+})
 
 
 module.exports = router;

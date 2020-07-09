@@ -3,9 +3,11 @@
 fetch("/api/workouts/range")
   .then(response => {
     return response.json();
+    //console.log('this is response ' + response);
   })
   .then(data => {
     populateChart(data);
+    //console.log('this is response ' + data);
   });
 
 
